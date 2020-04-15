@@ -68,7 +68,7 @@ prompt_segment() {
     echo -n " %{$bg%F{$CURRENT_BG}%}%K{}$SEGMENT_SEPARATOR%{$fg%}"
     echo -n "%{$bg%F{}%}$SEGMENT_SEPARATOR%{$fg%} "
   else
-    echo -n "%{$bg%}%{$fg%} "
+    echo -n "%{$bg%}%{$fg%}"
   fi
   CURRENT_BG=$1
   [[ -n $3 ]] && echo -n $3
@@ -91,7 +91,8 @@ prompt_end() {
 # Context: user@hostname (who am I and where am I)
 prompt_context() {
   if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-    prompt_segment 239 015 "%n@%m"
+    #prompt_segment 239 015 "%n@%m"
+    prompt_segment 239 015 "%F{}$SEGMENT_SEPARATOR%F{$CURRENT_BG}%n@%m"
   fi
 }
 
@@ -143,7 +144,7 @@ prompt_git() {
 
 # Dir: current working directory
 prompt_dir() {
-  prompt_segment 199 $CURRENT_FG '%~'
+  prompt_segment 199 black '%~'
 }
 
 # Status:
@@ -158,6 +159,7 @@ prompt_status() {
   [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{cyan}%}⚙"
 
   [[ -n "$symbols" ]] && prompt_segment black default "$symbols"
+  #prompt_segment black black
 }
 
 ## Main prompt
