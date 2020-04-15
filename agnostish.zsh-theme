@@ -92,7 +92,7 @@ prompt_end() {
 prompt_context() {
   if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
     #prompt_segment 239 015 "%n@%m"
-    prompt_segment 239 015 "%F{}$SEGMENT_SEPARATOR%F{$CURRENT_BG}%n@%m"
+    prompt_segment 239 015 "%F{}$SEGMENT_SEPARATOR%F{$CURRENT_BG} %n@%m"
   fi
 }
 
